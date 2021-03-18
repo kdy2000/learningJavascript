@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>floating "hello world"</title>
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+      class Ball {
+        constructor() {
+          let ballHtml = "<p>O</p>";
+          this.ballElement = $(ballHtml);
+          $("body").append(this.ballElement);
+
+          this.leftBound = 0;
+          this.rightBound = 400;
+          this.topBound = 0;
+          this.bottomBound = 400;
+
+          this.leftOffset =
+            Math.random() * (this.rightBound - (this.leftBound + 1)) +
+            (this.leftBound + 1);
+          this.topOffset =
+            Math.random() * (this.bottomBound - (this.topBound + 1)) +
+            (this.topBound + 1);
+
+          this.leftDelta = Math.random(1);
+          this.topDelta = Math.sqrt(1 - this.leftDelta * this.leftDelta);
+        }
+
+        move() {
+          if (this.leftOffset <= this.leftBound) {
+            this.leftDelta *= -1;
+          }
+          if (this.leftOffset >= this.rightBound) {
+            this.leftDelta *= -1;
+          }
+          if (this.topOffset <= this.topBound) {
+            this.topDelta *= -1;
+          }
+          if (this.topOffset >= this.bottomBound) {
+            this.topDelta *= -1;
+          }
+          this.ballElement.offset({
+            left: this.leftOffset,
+            top: this.topOffset,
+          });
+          this.leftOffset += this.leftDelta;
+          this.topOffset += this.topDelta;
+        }
+      }
+
+      let ball = [];
+      for (let i = 0; i < 20; i++) {
+        ball[i] = new Ball();
+        setInterval(function () {
+          ball[i].move();
+        }, 8);
+      }
+    </script>
+  </body>
+</html>

@@ -16,9 +16,9 @@
           $("body").append(this.ballElement);
 
           this.leftBound = 0;
-          this.rightBound = 400;
+          this.rightBound = document.documentElement.clientWidth - 30;
           this.topBound = 0;
-          this.bottomBound = 400;
+          this.bottomBound = document.documentElement.clientHeight - 30;
 
           this.leftOffset =
             Math.random() * (this.rightBound - (this.leftBound + 1)) +
@@ -54,7 +54,7 @@
       }
 
       let ball = [];
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 30; i++) {
         ball[i] = new Ball();
         setInterval(function () {
           ball[i].move();
